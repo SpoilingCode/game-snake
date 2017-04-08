@@ -5,8 +5,14 @@ package gameconstants;
  */
 public enum SnakeDirections {
 
-    LEFT,
-    RIGHT,
-    UP,
-    DOWN
+    LEFT(37),
+    RIGHT(39),
+    UP(38),
+    DOWN(40);
+
+    private int keyCode;
+
+    SnakeDirections(int keyCode) {
+        this.keyCode = keyCode;
+    }
 }
