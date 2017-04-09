@@ -5,8 +5,8 @@ package gameconstants;
  */
 public enum WindowParameters {
 
-    WINDOW_WIDTH(800),
-    WINDOW_HEIGHT(600),
+    WINDOW_WIDTH(600),
+    WINDOW_HEIGHT(400),
     RADIUS_OF_POINT(10),
     DELAY(80);
 

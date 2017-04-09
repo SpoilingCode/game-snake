@@ -1,7 +1,7 @@
 package gameobjects;
 
 import gameconstants.SnakeDirections;
-import org.omg.CORBA.PUBLIC_MEMBER;
+import gameconstants.WindowParameters;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -84,9 +84,30 @@ public class Snake {
           direction == SnakeDirections.S_DOWN.getKeyCode() ){
           headY++;
       }
+        System.out.println("x: " + headX);
+        System.out.println("y: " + headY);
+
+      checkExceedsScreenBorder(headX, headY);
 
       snakeElements.add(0, new Point(headX,headY));
       snakeElements.remove(snakeElements.size() - 1);
     }
 
+    public void checkExceedsScreenBorder(int x, int y){
+      if( x > 58){
+          x = 0;
+      }
+
+      if( y > 38){
+          y = 0;
+      }
+
+      if(x < 0){
+          x = WindowParameters.WINDOW_WIDTH.getValue() - 1;
+      }
+
+      if(y < 0){
+          y = WindowParameters.WINDOW_HEIGHT.getValue() - 1;
+      }
+    }
 }
