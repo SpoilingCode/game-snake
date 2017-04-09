@@ -8,7 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * Class for drawElementsGame
+ * Class for drawWindow
  */
 public class View extends JPanel{
 
@@ -40,7 +40,7 @@ public class View extends JPanel{
         snake.paint(g);
     }
 
-    public void drawElementsGame(){
+    public void drawWindow(){
      gameWindow = new JFrame("Game Snake");
      gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);;
      gameWindow.setSize( WindowParameters.WINDOW_WIDTH.getValue(),

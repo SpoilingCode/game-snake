@@ -35,7 +35,7 @@ public class GameCore {
       keyBoardListener.setSnake(snake);
       view.setKeyBoardListener(keyBoardListener);
       view.setView(view);
-      view.drawElementsGame();
+      view.drawWindow();
 
         while (!isGameOver()){
           snake.startMove();
