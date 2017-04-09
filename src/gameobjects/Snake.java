@@ -1,7 +1,6 @@
 package gameobjects;
 
 import gameconstants.SnakeDirections;
-import gameconstants.WindowParameters;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -15,6 +14,8 @@ public class Snake {
     private List<Point> snakeElements = new ArrayList<>();
     private Point point;
     private Point head;
+    private int headX;
+    private int headY;
     private int direction;
     private int length;
     private int x;
@@ -62,8 +63,8 @@ public class Snake {
 
       head = snakeElements.get(0);
 
-      int headX = head.getX();
-      int headY = head.getY();
+      headX = head.getX();
+      headY = head.getY();
 
       if( direction == SnakeDirections.RIGHT.getKeyCode() ||
           direction == SnakeDirections.D_RIGHT.getKeyCode()){
@@ -87,27 +88,16 @@ public class Snake {
         System.out.println("x: " + headX);
         System.out.println("y: " + headY);
 
-      checkExceedsScreenBorder(headX, headY);
-
       snakeElements.add(0, new Point(headX,headY));
       snakeElements.remove(snakeElements.size() - 1);
     }
 
-    public void checkExceedsScreenBorder(int x, int y){
-      if( x > 58){
-          x = 0;
-      }
+    public boolean isExceedsScreenBorder(){
+        int widthMargin = 58; // in points
+        int heightMargin = 36;
 
-      if( y > 38){
-          y = 0;
-      }
-
-      if(x < 0){
-          x = WindowParameters.WINDOW_WIDTH.getValue() - 1;
-      }
-
-      if(y < 0){
-          y = WindowParameters.WINDOW_HEIGHT.getValue() - 1;
-      }
+        return(headX > widthMargin  ||
+               headY > heightMargin ||
+               headX < 0 || headY < 0);
     }
 }

@@ -8,19 +8,19 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * Class for drawWindow
+ * Class for drawing window the game
  */
 public class View extends JPanel{
 
     private Snake snake;
     private JFrame gameWindow;
     private View view;
+    private KeyBoardListener keyBoardListener;
 
     public void setKeyBoardListener(KeyBoardListener keyBoardListener) {
         this.keyBoardListener = keyBoardListener;
-    }
 
-    private KeyBoardListener keyBoardListener;
+    }
 
     public void setView(View view) {
         this.view = view;
@@ -40,7 +40,12 @@ public class View extends JPanel{
         snake.paint(g);
     }
 
+    public JFrame getGameWindow() {
+        return gameWindow;
+    }
+
     public void drawWindow(){
+
      gameWindow = new JFrame("Game Snake");
      gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);;
      gameWindow.setSize( WindowParameters.WINDOW_WIDTH.getValue(),
@@ -51,6 +56,7 @@ public class View extends JPanel{
      setBackground(Color.BLUE);
      gameWindow.getContentPane().add(BorderLayout.CENTER, view);
      gameWindow.addKeyListener(keyBoardListener);
+
      gameWindow.setVisible(true);
      gameWindow.setLocationRelativeTo(null);
     }

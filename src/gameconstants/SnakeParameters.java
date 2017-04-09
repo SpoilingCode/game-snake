@@ -5,7 +5,7 @@ package gameconstants;
  */
 public enum SnakeParameters {
 
-    START_POSITION(100),
+    START_POSITION(200),
     START_POSITION_OF_SNAKE_ON_X(7),
     START_POSITION_OF_SNAKE_ON_Y(7),
     SNAKE_LENGTH(8);
