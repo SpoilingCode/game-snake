@@ -1,19 +1,20 @@
 package gameconstants;
 
 /**
- * Created by gerit on 08.04.2017.
+ * Class for specific the values of the game window
  */
 public enum WindowParameters {
 
-    START_POSITION(200),
-    FIELD_HEIGHT(20),
-    FIELD_WIDTH(30),
-    FIELD_DX(6),
-    FIELD_DY(20),
-    RADIUS_OF_CIRCLE(20),
-    DELAY(150);
+    WINDOW_WIDTH(800),
+    WINDOW_HEIGHT(600),
+    RADIUS_OF_POINT(10),
+    DELAY(80);
 
     private int value;
+
+    public int getValue() {
+        return value;
+    }
 
     WindowParameters(int value) {
         this.value = value;
