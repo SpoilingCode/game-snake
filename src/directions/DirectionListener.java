@@ -1,4 +1,4 @@
-package gameview;
+package directions;
 
 import gameobjects.Snake;
 
@@ -8,7 +8,7 @@ import java.awt.event.KeyEvent;
 /**
  * Class for controlling the snake using the keys
  */
-public class KeyBoardListener extends KeyAdapter {
+public class DirectionListener extends KeyAdapter {
 
     private Snake snake;
 

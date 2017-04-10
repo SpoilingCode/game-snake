@@ -1,5 +1,6 @@
 package gameview;
 
+import directions.DirectionListener;
 import gameconstants.SnakeParameters;
 import gameconstants.WindowParameters;
 import gameobjects.Product;
@@ -17,10 +18,10 @@ public class View extends JPanel{
     private Product product;
     private JFrame gameWindow;
     private View view;
-    private KeyBoardListener keyBoardListener;
+    private DirectionListener directionListener;
 
-    public void setKeyBoardListener(KeyBoardListener keyBoardListener) {
-        this.keyBoardListener = keyBoardListener;
+    public void setDirectionListener(DirectionListener directionListener) {
+        this.directionListener = directionListener;
     }
 
     public void setView(View view) {
@@ -47,7 +48,6 @@ public class View extends JPanel{
     }
 
     public void drawWindow(){
-
      gameWindow = new JFrame("Game Snake " );
      gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);;
      gameWindow.setSize( WindowParameters.WINDOW_WIDTH.getValue(),
@@ -57,10 +57,9 @@ public class View extends JPanel{
                              SnakeParameters.START_POSITION.getValue());
      setBackground(Color.BLUE);
      gameWindow.getContentPane().add(BorderLayout.CENTER, view);
-     gameWindow.addKeyListener(keyBoardListener);
+     gameWindow.addKeyListener(directionListener);
 
      gameWindow.setVisible(true);
      gameWindow.setLocationRelativeTo(null);
-
     }
 }

@@ -1,4 +1,4 @@
-package gameconstants;
+package directions;
 
 /**
  * Class contains key code for moving the snake

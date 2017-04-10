@@ -2,7 +2,6 @@ package gameobjects;
 
 import gameconstants.WindowParameters;
 
-
 import java.awt.*;
 import java.util.Random;
 
@@ -32,7 +31,7 @@ public class Product extends Point{
         this.setY(-10);
     }
 
-    public void followingProduct(){
+    public void showNext(){
         random = new Random();
         do {
             this.setX(random.nextInt(WindowParameters.MARGIN_WIDTH.getValue()));

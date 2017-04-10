@@ -1,7 +1,7 @@
 package gameobjects;
 
 import game.PointsHandler;
-import gameconstants.SnakeDirections;
+import directions.SnakeDirections;
 import gameconstants.WindowParameters;
 
 import java.awt.*;
@@ -55,26 +55,20 @@ public class Snake {
     }
 
     public void addPointInSnakeElements(){
-
         for(int i = 0; i < length  ; i++){
             point = new Point(x - i, y);
             snakeElements.add(point);
         }
-
     }
 
     public void paint(Graphics g){
-
        for(Point point : snakeElements){
            point.paint(g);
        }
-
     }
 
     public void startMove(){
-
       head = snakeElements.get(0);
-
       headX = head.getX();
       headY = head.getY();
 
@@ -100,7 +94,7 @@ public class Snake {
 
       snakeElements.add(0, new Point(headX,headY));
 
-      if(isSnakeHasBlockedProduct(product)){
+      if(isSnakeHasBlockedPoint(product)){
 
           product.hide();
           pointsHandler.calculatePointsQuantity();
@@ -108,17 +102,15 @@ public class Snake {
       }else {
           snakeElements.remove(snakeElements.size() - 1);
       }
-
     }
 
     public boolean isExceedsScreenBorder(){
-
         return(headX > WindowParameters.MARGIN_WIDTH.getValue() ||
                headY > WindowParameters.MARGIN_HEIGHT.getValue() ||
                headX < 0 || headY < 0);
     }
 
-    public boolean isSnakeHasBlockedProduct(Point product){
+    public boolean isSnakeHasBlockedPoint(Point product){
         return ( headX == product.getX() &&
                  headY == product.getY());
     }
@@ -131,5 +123,4 @@ public class Snake {
         }
         return false;
     }
-
 }

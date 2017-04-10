@@ -1,10 +1,10 @@
 package game;
 
-import gameconstants.SnakeDirections;
+import directions.DirectionListener;
+import directions.SnakeDirections;
 import gameconstants.SnakeParameters;
 import gameconstants.WindowParameters;
 import gameobjects.*;
-import gameview.KeyBoardListener;
 import gameview.View;
 
 /**
@@ -13,7 +13,7 @@ import gameview.View;
 public class GameCore {
 
     private View view;
-    private KeyBoardListener keyBoardListener;
+    private DirectionListener directionListener;
     private Snake snake;
     private Product product;
     private PointsHandler pointsHandler;
@@ -24,19 +24,19 @@ public class GameCore {
     }
 
     public void startGame(){
-
-      snake = new Snake( SnakeParameters.START_POSITION_OF_SNAKE_ON_X.getValue(),
-                         SnakeParameters.START_POSITION_OF_SNAKE_ON_Y.getValue());
+      int startPositionX = SnakeParameters.START_POSITION_OF_SNAKE_ON_X.getValue();
+      int startPositionY = SnakeParameters.START_POSITION_OF_SNAKE_ON_Y.getValue();
+      snake = new Snake( startPositionX, startPositionY);
       snake.setDirection(SnakeDirections.RIGHT.getKeyCode());
       snake.setLength(SnakeParameters.SNAKE_LENGTH.getValue());
       snake.addPointInSnakeElements();
 
       view = new View();
       view.setSnake(snake);
-      keyBoardListener = new KeyBoardListener();
-      keyBoardListener.setSnake(snake);
+      directionListener = new DirectionListener();
+      directionListener.setSnake(snake);
 
-      view.setKeyBoardListener(keyBoardListener);
+      view.setDirectionListener(directionListener);
       view.setView(view);
       view.drawWindow();
 
@@ -49,20 +49,22 @@ public class GameCore {
       snake.setProduct(product);
       snake.setPointsHandler(pointsHandler);
       boolean gameEnd = false;
+      String gameEndMessage = "GAME OVER! ";
+      String quantityPointsMessage = "  Quantity points: ";
 
       while (!gameEnd) {
           snake.startMove();
 
           if (product.isEaten()) {
-              product.followingProduct();
+              product.showNext();
           }
           view.repaint();
           makeDelay();
 
           if (snake.isExceedsScreenBorder()) {
-              view.getGameWindow().setTitle("GAME OVER! " +
-                                            "  Quantity points: " +
-                                             pointsHandler.getQuantityPoints());
+              view.getGameWindow().
+                   setTitle(gameEndMessage + quantityPointsMessage +
+                            pointsHandler.getQuantityPoints());
               gameEnd = true;
           }
       }
