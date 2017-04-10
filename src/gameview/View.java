@@ -2,6 +2,7 @@ package gameview;
 
 import gameconstants.SnakeParameters;
 import gameconstants.WindowParameters;
+import gameobjects.Product;
 import gameobjects.Snake;
 
 import javax.swing.*;
@@ -13,31 +14,32 @@ import java.awt.*;
 public class View extends JPanel{
 
     private Snake snake;
+    private Product product;
     private JFrame gameWindow;
     private View view;
     private KeyBoardListener keyBoardListener;
 
     public void setKeyBoardListener(KeyBoardListener keyBoardListener) {
         this.keyBoardListener = keyBoardListener;
-
     }
 
     public void setView(View view) {
         this.view = view;
     }
 
-    public View(){
-
-    }
-
     public void setSnake(Snake snake) {
         this.snake = snake;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     @Override
     public void paint(Graphics g) {
         super.paint(g);
         snake.paint(g);
+        product.paint(g);
     }
 
     public JFrame getGameWindow() {
@@ -46,7 +48,7 @@ public class View extends JPanel{
 
     public void drawWindow(){
 
-     gameWindow = new JFrame("Game Snake");
+     gameWindow = new JFrame("Game Snake " );
      gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);;
      gameWindow.setSize( WindowParameters.WINDOW_WIDTH.getValue(),
                          WindowParameters.WINDOW_HEIGHT.getValue());
@@ -59,5 +61,6 @@ public class View extends JPanel{
 
      gameWindow.setVisible(true);
      gameWindow.setLocationRelativeTo(null);
+
     }
 }

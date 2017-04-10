@@ -1,6 +1,8 @@
 package gameobjects;
 
+import game.PointsHandler;
 import gameconstants.SnakeDirections;
+import gameconstants.WindowParameters;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -12,8 +14,10 @@ import java.util.List;
 public class Snake {
 
     private List<Point> snakeElements = new ArrayList<>();
+    private PointsHandler pointsHandler;
     private Point point;
     private Point head;
+    private Product product;
     private int headX;
     private int headY;
     private int direction;
@@ -40,6 +44,14 @@ public class Snake {
 
     public void setLength(int length) {
         this.length = length;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public void setPointsHandler(PointsHandler pointsHandler) {
+        this.pointsHandler = pointsHandler;
     }
 
     public void addPointInSnakeElements(){
@@ -85,19 +97,39 @@ public class Snake {
           direction == SnakeDirections.S_DOWN.getKeyCode() ){
           headY++;
       }
-        System.out.println("x: " + headX);
-        System.out.println("y: " + headY);
 
       snakeElements.add(0, new Point(headX,headY));
-      snakeElements.remove(snakeElements.size() - 1);
+
+      if(isSnakeHasBlockedProduct(product)){
+
+          product.hide();
+          pointsHandler.calculatePointsQuantity();
+
+      }else {
+          snakeElements.remove(snakeElements.size() - 1);
+      }
+
     }
 
     public boolean isExceedsScreenBorder(){
-        int widthMargin = 58; // in points
-        int heightMargin = 36;
 
-        return(headX > widthMargin  ||
-               headY > heightMargin ||
+        return(headX > WindowParameters.MARGIN_WIDTH.getValue() ||
+               headY > WindowParameters.MARGIN_HEIGHT.getValue() ||
                headX < 0 || headY < 0);
     }
+
+    public boolean isSnakeHasBlockedProduct(Point product){
+        return ( headX == product.getX() &&
+                 headY == product.getY());
+    }
+
+    public boolean isProductInsideTheSnake(int x, int y){
+        for(Point point : snakeElements){
+            if(point.getX() == x && point.getY() == y){
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

@@ -7,10 +7,6 @@ import gameobjects.*;
 import gameview.KeyBoardListener;
 import gameview.View;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.image.VolatileImage;
-
 /**
  * Class for launch game
  */
@@ -19,6 +15,8 @@ public class GameCore {
     private View view;
     private KeyBoardListener keyBoardListener;
     private Snake snake;
+    private Product product;
+    private PointsHandler pointsHandler;
 
     public static void main(String[] args) {
         GameCore gameCore = new GameCore();
@@ -37,20 +35,37 @@ public class GameCore {
       view.setSnake(snake);
       keyBoardListener = new KeyBoardListener();
       keyBoardListener.setSnake(snake);
+
       view.setKeyBoardListener(keyBoardListener);
       view.setView(view);
       view.drawWindow();
 
-        while (!isGameOver()){
+      product = new Product();
+      product.setSnake(snake);
+
+      view.setProduct(product);
+      pointsHandler = new PointsHandler();
+
+      snake.setProduct(product);
+      snake.setPointsHandler(pointsHandler);
+      boolean gameEnd = false;
+
+      while (!gameEnd) {
           snake.startMove();
+
+          if (product.isEaten()) {
+              product.followingProduct();
+          }
           view.repaint();
           makeDelay();
 
-          if(snake.isExceedsScreenBorder()){
-              view.getGameWindow().setTitle("GAME OVER!");
-              break;
+          if (snake.isExceedsScreenBorder()) {
+              view.getGameWindow().setTitle("GAME OVER! " +
+                                            "  Quantity points: " +
+                                             pointsHandler.getQuantityPoints());
+              gameEnd = true;
           }
-        }
+      }
     }
 
     public void makeDelay(){
@@ -59,10 +74,6 @@ public class GameCore {
         }catch (InterruptedException ie){
             ie.printStackTrace();
         }
-    }
-
-    public boolean isGameOver(){
-       return false;
     }
 }
 

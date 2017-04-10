@@ -7,6 +7,8 @@ public enum WindowParameters {
 
     WINDOW_WIDTH(600),
     WINDOW_HEIGHT(400),
+    MARGIN_WIDTH(58),
+    MARGIN_HEIGHT(36),
     RADIUS_OF_POINT(10),
     DELAY(80);
 

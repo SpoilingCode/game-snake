@@ -11,6 +11,7 @@ public class Point {
 
     private int x;
     private int y;
+    protected Color color = Color.GREEN;
 
     public Point(int x, int y) {
       this.setX(x);
@@ -34,7 +35,7 @@ public class Point {
     }
 
     public void paint(Graphics g){
-        g.setColor(Color.GREEN);
+        g.setColor(color);
         g.fillOval(x * WindowParameters.RADIUS_OF_POINT.getValue(), y * WindowParameters.RADIUS_OF_POINT.getValue(),
                        WindowParameters.RADIUS_OF_POINT.getValue(), WindowParameters.RADIUS_OF_POINT.getValue());
     }
